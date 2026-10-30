@@ -1,0 +1,15 @@
+Carga: 379 filas x 48 columnas
+longitude: 10 valores con coma decimal/espacio duro convertidos a float
+latitude fila 122: 42841.0 -> 42.841 (punto decimal perdido; Grant County, United States of America)
+Fechas parseadas. end_date_outbreak faltante en 30% (brotes sin cierre): duration_days solo existe donde hay cierre
+species: 37 nombres -> 35 unificados; species_group con 6 grupos
+species_group es una agrupación NUESTRA (criterio biológico); revisar. Ojo: 'Brown skua' y 'Kelp Gull' son aves, no mamíferos (error de la fuente): se marcan en is_bird
+epidemiological_unit '-' (2) y typology_of_animal NaN (1) -> 'Unknown' (no imputamos a mano)
+33 eventos de Finlandia en granjas (zorros, visones, perros mapache) marcados como is_farmed_wild_species; typology_adj los separa de 'Wild' (decidir con el grupo cuál usar)
+control_measures: 10 banderas + ctl_none + ctl_unknown (68 sin dato, NO se asumen 'sin medidas')
+lethal: 329 letal, 34 positivo, 16 'not certified' (NaN, excluidos del modelado)
+total_cases/total_deaths: NaN se conservan + banderas *_missing; log_cases = log1p. Imputar (mediana) SOLO dentro de cada fold al modelar, no aquí
+Descartadas por >80% NA: ['test_name_3', 'laboratory_name_3', 'first_result_date_3', 'latest_result_date_3', 'result_3', 'total_susceptible', 'total_slaughtered_killed_for_commercial_use', 'total_vaccinated', 'detailed_characterisation']
+Descartadas por ser URLs/ids/texto largo (se conservan en el CSV crudo): ['url_event', 'url_pdf', 'report_number', 'country_iso3_digit', 'affected_population_description']
+Filas duplicadas exactas: 0. label_id repetido en 30 filas: son eventos distintos del mismo brote (misma ficha, otra especie/ubicación) -> NO se eliminan
+Guardado avian_clean.csv: 379 filas x 59 columnas
