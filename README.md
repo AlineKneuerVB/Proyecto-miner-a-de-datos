@@ -26,12 +26,6 @@ proyecto/
 └─ run_all.sh
 ```
 
-## Cómo reproducir
-```bash
-pip install -r requirements.txt
-bash run_all.sh
-```
-
 ## Decisiones de limpieza (detalle en `data/processed/limpieza_log.txt`)
 - Longitud como texto con coma decimal → número. Una latitud sin punto decimal (42841 → 42,841).
 - Nombres de especies duplicados unificados (37 → 35) y agrupados.
